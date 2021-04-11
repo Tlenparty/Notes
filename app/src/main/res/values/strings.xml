@@ -5,4 +5,6 @@
     <string name="notes">Заметки</string>
     <string name="note">Заметка</string>
     <string name="titleTextFragment">Введите заголовок заметки</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
