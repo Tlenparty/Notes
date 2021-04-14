@@ -9,15 +9,10 @@ public class Note implements Parcelable {
 
     private String title;
     private String description;
-    private int id;
+    private String id;
 
 
-    /*  public Note(String title, String description) {
-          this.title = title;
-          this.description = description;
-      }
-  */
-    public Note(int id, String title, String description) {
+    public Note(String id, String title, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -27,7 +22,7 @@ public class Note implements Parcelable {
     // Консутруктор, считывающий данные из Parcel
 
     protected Note(Parcel in) {
-        id = in.readInt();
+        id = in.readString();
         title = in.readString();
         description = in.readString();
     }
@@ -54,7 +49,7 @@ public class Note implements Parcelable {
     // Упаковываем объект в Parcel
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(getId());
+        dest.writeString(getId());
         dest.writeString(getTitle());
     }
 
@@ -74,11 +69,11 @@ public class Note implements Parcelable {
         this.description = description;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 }

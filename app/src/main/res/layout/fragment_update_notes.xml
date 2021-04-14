@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/ThemeMainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SecondFragment">
+    style="@style/ThemeMainLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".UpdateNotesFragment">
 
     <EditText
-        android:id="@+id/etTitle"
+        android:id="@+id/title_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/layout_margin"
@@ -19,37 +19,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etDescription"
+        android:id="@+id/description_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/layout_margin"
         android:hint="Description"
         android:textSize="@dimen/casualTextSize"
-        app:layout_constraintTop_toBottomOf="@id/etTitle" />
+        app:layout_constraintTop_toBottomOf="@id/title_update" />
 
     <Button
-        android:id="@+id/btn_addNote"
+        android:id="@+id/btn_updateNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/layout_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:background="@drawable/custom_btn_bg"
-        android:text="Add note"
+        android:text="Update note"
         android:textStyle="bold"
         android:textSize="18sp"/>
-
-    <!--  <TextView
-          android:id="@+id/tvDescription_from_second_fragment"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:textSize="@dimen/titleTextSize"/>
-
-      <TextView
-          android:id="@+id/tvId"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:textSize="@dimen/titleTextSize"/>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

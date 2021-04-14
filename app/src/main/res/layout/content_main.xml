@@ -10,7 +10,7 @@
     tools:showIn="@layout/app_bar_main"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <TextView
+ <!--   <TextView
         android:id="@+id/title_note"
         style="@style/ThemeMainLayout"
         android:layout_width="wrap_content"
@@ -20,20 +20,20 @@
         android:layout_marginEnd="@dimen/mainMargin"
         android:text="@string/notes"
         android:textSize="@dimen/titleTextSize"
-        android:textStyle="bold" />
+        android:textStyle="bold" />-->
 
 
-    <fragment
-        android:id="@+id/fragment_container"
-        android:name="com.geekbrains.notes.FirstFragment"
+    <FrameLayout
+        android:id="@+id/first_fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
-    <Space
+  <!--  <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1" />-->
 
+<!--
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -44,6 +44,7 @@
         android:src="@drawable/ic_baseline_add_24"
         android:backgroundTint="@color/oldPagesColor"
         android:contentDescription="TODO" />
+-->
 
 
 

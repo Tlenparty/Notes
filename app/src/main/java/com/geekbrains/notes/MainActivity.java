@@ -6,6 +6,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.widget.SearchView;
 import android.content.Intent;
@@ -20,22 +22,11 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
     /*
-1. Подумайте о функционале вашего приложения заметок. Какие экраны там могут быть, помимо основного
-со списком заметок? Как можно использовать меню и всплывающее меню в вашем приложении? Не обязательно
-сразу пытаться реализовать весь этот функционал, достаточно создать макеты и структуру, а реализацию
-пока заменить на заглушки или всплывающие уведомления (Toast). Используйте подход Single Activity для
-отображения экранов.
-В качестве примера: на главном экране приложения у вас список всех заметок, при нажатии на заметку
-открывается экран с этой заметкой. В меню главного экрана у вас есть иконка поиска по заметкам и
-сортировка.
-В меню «Заметки» у вас есть иконки «Переслать» (или «Поделиться»), «Добавить ссылку или фотографию к
-заметке».
-2. Создайте боковое навигационное меню для своего приложения и добавьте туда хотя бы один экран,
-например
-«Настройки» или «О приложении».
-3. * Создайте полноценный заголовок для NavigationDrawer’а. К примеру, аватарка пользователя,
-его имя
-и какая-то дополнительная информация.
+1. Создайте список ваших заметок. +
+2. Создайте карточку для элемента списка. +
+3. Класс данных, созданный на шестом уроке, используйте для заполнения карточки списка.
+* Создайте фрагмент для редактирования данных в конкретной карточке. Этот фрагмент пока можно
+вызвать через основное меню.
    */
 
     FloatingActionButton fab;
@@ -44,9 +35,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initFabButton();
-        setActionFabButton();
         initMenus();
+        addFragment();
+    }
+
+    private void addFragment() {
+        FirstFragment firstFragment = new FirstFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.first_fragment_container,firstFragment);
+        fragmentTransaction.commit();
     }
 
 
@@ -99,16 +97,17 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void setActionFabButton() {
-        fab.setOnClickListener(v -> {
-            Intent intent = new Intent();
-            intent.setClass(MainActivity.this, SecondActivity.class);
-            startActivity(intent);
-        });
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId()== R.id.delete_all_notes){
+            deleteAllNotes();
+        }
+            return super.onOptionsItemSelected(item);
     }
 
-    private void initFabButton() {
-        fab = findViewById(R.id.fab);
+    private void deleteAllNotes() {
+        DataBaseClass db = new DataBaseClass(MainActivity.this);
+        db.deleteAllNotes();
+        recreate();
     }
-
 }
