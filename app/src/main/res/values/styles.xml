@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ThemeApp" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">monospace</item>
+    </style>
+
+    <style name="ThemeFragmentLayout" >
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ThemeMainLayout">
+        <item name="android:background">@color/oldPagesColor</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+</resources>
