@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         FirstFragment firstFragment = new FirstFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.first_fragment_container,firstFragment);
+        fragmentTransaction.replace(R.id.first_fragment_container, firstFragment);
         fragmentTransaction.commit();
     }
 
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         // Тумблер. Открытие закрытие тулбара
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this,drawerLayout,toolbar,
+                this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
+
             // реагирует на нажатие каждой клавиши
             @Override
             public boolean onQueryTextChange(String newText) {
@@ -99,10 +100,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId()== R.id.delete_all_notes){
+        if (item.getItemId() == R.id.delete_all_notes) {
             deleteAllNotes();
         }
-            return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 
     private void deleteAllNotes() {

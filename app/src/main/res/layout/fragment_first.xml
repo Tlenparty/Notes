@@ -1,36 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/first_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/oldPagesColor"
     android:orientation="vertical"
-    tools:context=".FirstFragment"
     app:layout_behavior="@string/fab_transformation_scrim_behavior"
-    android:id="@+id/first_fragment">
+    tools:context=".FirstFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-    <!--
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="This is the Title"
-        android:textSize="@dimen/casualTextSize"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tvDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="This is description"
-        android:textSize="@dimen/casualTextSize"
-        android:textStyle="bold" />-->
+        android:layout_height="match_parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -39,9 +22,8 @@
         android:layout_gravity="end|bottom"
         android:layout_marginEnd="@dimen/mainMargin"
         android:layout_marginBottom="@dimen/mainMargin"
-        android:src="@drawable/ic_baseline_add_24"
         android:backgroundTint="@color/oldPagesColor"
         android:contentDescription="TODO"
-        />
+        android:src="@drawable/ic_baseline_add_24" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

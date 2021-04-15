@@ -22,7 +22,6 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     Context context;
-    Activity activity;
     List<Note> noteList;
 
     public MyAdapter(Context context,  List<Note> noteList) {
@@ -43,7 +42,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
         holder.onBind(position);
-        //holder.onUpdateNote(position);
+        //holder.onUpdateNote(position); // для активити( а у нас фрагмент((
     }
 
     // Возвращение размера списка
@@ -62,17 +61,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             description = itemView.findViewById(R.id.tvDescription);
             layout = itemView.findViewById(R.id.note_layout);
             layout.setOnClickListener(v -> {
-                AppCompatActivity activity = (AppCompatActivity) itemView.getContentDescription();
+                AppCompatActivity activity = (AppCompatActivity) itemView.getContext();
+                UpdateNotesFragment updateNotesFragment = new UpdateNotesFragment();
                 Intent intent = new Intent(context,SecondActivity.class);
                 Bundle bundle = new Bundle();
-                UpdateNotesFragment updateNotesFragment = new UpdateNotesFragment();
+                updateNotesFragment.setArguments(bundle);
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.content,
+                        updateNotesFragment, "UPDATE").commit(); // НЕ МОЖЕТ НАЙТИ ВЬЮ почему.. (((
+                activity.startActivity(intent);
+
+
                 //fragment.setArguments(getIntent().getExtras());
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_second, updateNotesFragment).commit();
          /*       bundle.putString("title",noteList.get(position).getTitle());
                 bundle.putString("description",noteList.get(position).getDescription());
                 bundle.putString("id",noteList.get(position).getId());*/
-                updateNotesFragment.setArguments(bundle);
-                context.startActivity(intent);
 
 
               /*  Intent intent = new Intent(context,SecondActivity.class);

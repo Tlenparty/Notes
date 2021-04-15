@@ -51,6 +51,7 @@ public class Note implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(getId());
         dest.writeString(getTitle());
+        dest.writeString(getDescription());
     }
 
     public String getTitle() {

@@ -64,18 +64,15 @@ public class UpdateNotesFragment extends Fragment {
             description = view.findViewById(R.id.description_update);
             btn_updateNote = view.findViewById(R.id.btn_updateNote);
 
-            btn_updateNote.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (!TextUtils.isEmpty(title.getText().toString()) && !TextUtils.isEmpty(description.getText().toString())) {
-                        DataBaseClass db = new DataBaseClass(getActivity());
-                        db.updateNotes(title.getText().toString(), description.getText().toString(), id);
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(getActivity(), "Оба поля обязательны!", Toast.LENGTH_LONG).show();
-                    }
+            btn_updateNote.setOnClickListener(v -> {
+                if (!TextUtils.isEmpty(title.getText().toString()) && !TextUtils.isEmpty(description.getText().toString())) {
+                    DataBaseClass db = new DataBaseClass(getActivity());
+                    db.updateNotes(title.getText().toString(), description.getText().toString(), id);
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity(), "Оба поля обязательны!", Toast.LENGTH_LONG).show();
                 }
             });
 

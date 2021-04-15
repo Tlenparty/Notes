@@ -24,7 +24,11 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
 
         //setUpdateFragment(); // Не понятно как регулировать 2 фрагмента на SecondActivity
-        setNoteFragment();
+        UpdateNotesFragment updateNotesFragment = (UpdateNotesFragment)getSupportFragmentManager().
+                findFragmentByTag("UPDATE");
+        if (updateNotesFragment == null) {
+            setNoteFragment();
+        }
 
     }
 
