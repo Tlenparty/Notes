@@ -3,20 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
+   <!-- <item
         android:id="@+id/settings"
-        android:title="Settings"
-        />
+        android:title="@string/settings"/>
     <item
         android:id="@+id/delete_all_notes"
-        android:title="Delete all"
-        />
+        android:title="@string/delete_all"/>
 
     <item
         android:id="@+id/search_bar"
-        android:title="Search_bar"
+        android:title="@string/search_bar"
         android:icon="@drawable/ic_baseline_search_24"
         app:showAsAction="always|collapseActionView"
-        app:actionViewClass="android.widget.SearchView" />
+        app:actionViewClass="android.widget.SearchView"/>-->
 
 </menu>

@@ -5,21 +5,14 @@
     style="@style/ThemeMainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/app_bar_main">
 
-
-    <fragment
-        android:name="com.geekbrains.notes.FirstFragment"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.5" />
-
-
-    <fragment
-        android:name="com.geekbrains.notes.UpdateNotesFragment"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.5" />
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

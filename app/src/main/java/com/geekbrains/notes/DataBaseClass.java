@@ -14,7 +14,6 @@ public class DataBaseClass extends SQLiteOpenHelper {
     Context context;
     public static final String DataBaseName = "MyNotes";
     public static final int DataBaseVersion = 1;
-
     public static final String TableName = "mynotes";
     public static final String ColumnId = "id";
     public static final String ColumnTitle = "title";
@@ -55,13 +54,13 @@ public class DataBaseClass extends SQLiteOpenHelper {
         }
     }
 
-    Cursor readAllData(){
+    Cursor readAllData() {
         String query = "SELECT * FROM " + TableName;
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
-        if (db!=null){
-            cursor = db.rawQuery(query,null);
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
         }
         return cursor;
     }
@@ -75,13 +74,13 @@ public class DataBaseClass extends SQLiteOpenHelper {
     public void updateNotes(String title, String description, String id) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(ColumnTitle , title);
+        cv.put(ColumnTitle, title);
         cv.put(ColumnDescription, description);
 
-        long result = database.update(TableName,cv,"id=?", new String[]{id});
-        if(result ==-1){
+        long result = database.update(TableName, cv, "id=?", new String[]{id});
+        if (result == -1) {
             Toast.makeText(context, "Ошибка", Toast.LENGTH_LONG).show();
-        }else{
+        } else {
             Toast.makeText(context, "Выполнено", Toast.LENGTH_LONG).show();
         }
     }

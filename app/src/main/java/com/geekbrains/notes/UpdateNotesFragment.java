@@ -1,13 +1,13 @@
 package com.geekbrains.notes;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -23,7 +23,6 @@ public class UpdateNotesFragment extends Fragment {
     EditText title, description;
     Button btn_updateNote;
     String id;
-    Context context;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,17 +41,14 @@ public class UpdateNotesFragment extends Fragment {
         initView(view);
     }
 
-
-
-  /*  private void setNoteFragment() {
-        SecondFragment fragment = new SecondFragment();
-        fragment.setArguments(getIntent().getExtras());
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container_second, fragment).commit();
-    }*/
-
     private void initView(View view) {
+        initButtonUpdate(view);
+        initFields(view);
+    }
+
+    private void initFields(View view) {
+        title = view.findViewById(R.id.title_update);
+        description = view.findViewById(R.id.description_update);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             String titleStr = bundle.getString("title");
@@ -60,22 +56,23 @@ public class UpdateNotesFragment extends Fragment {
             id = bundle.getString("id");
             title.setText(titleStr);
             description.setText(descriptionStr);
-            title = view.findViewById(R.id.title_update);
-            description = view.findViewById(R.id.description_update);
-            btn_updateNote = view.findViewById(R.id.btn_updateNote);
-
-            btn_updateNote.setOnClickListener(v -> {
-                if (!TextUtils.isEmpty(title.getText().toString()) && !TextUtils.isEmpty(description.getText().toString())) {
-                    DataBaseClass db = new DataBaseClass(getActivity());
-                    db.updateNotes(title.getText().toString(), description.getText().toString(), id);
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getActivity(), "Оба поля обязательны!", Toast.LENGTH_LONG).show();
-                }
-            });
-
         }
+    }
+
+    private void initButtonUpdate(View view) {
+        btn_updateNote = view.findViewById(R.id.btn_updateNote);
+        btn_updateNote.setOnClickListener(v -> {
+            if (!TextUtils.isEmpty(title.getText().toString()) && !TextUtils.isEmpty(description.getText().toString())) {
+                DataBaseClass db = new DataBaseClass(getActivity());
+                db.updateNotes(title.getText().toString(), description.getText().toString(), id);
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                ListNotesFragment fragment = new ListNotesFragment();
+                FragmentManager fragmentManager = activity.getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, fragment).commit();
+            } else {
+                Toast.makeText(getActivity(), "Оба поля обязательны!", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

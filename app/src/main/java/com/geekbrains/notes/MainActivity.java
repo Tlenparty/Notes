@@ -1,16 +1,22 @@
 package com.geekbrains.notes;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.res.Configuration;
+import android.database.Cursor;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SearchView;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,33 +26,27 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     /*
-1. Создайте список ваших заметок. +
-2. Создайте карточку для элемента списка. +
-3. Класс данных, созданный на шестом уроке, используйте для заполнения карточки списка.
-* Создайте фрагмент для редактирования данных в конкретной карточке. Этот фрагмент пока можно
-вызвать через основное меню.
+1. Сделайте фрагмент добавления и редактирования данных, если вы ещё не сделали его.
+2. Сделайте навигацию между фрагментами, также организуйте обмен данными между фрагментами.
+3. Создайте контекстное меню для изменения и удаления заметок.
+*Изучите, каким образом можно вызывать DatePicker в виде диалогового окна. Создайте текстовое поле, при нажатии на которое вызывалось бы диалоговое окно с DatePicker.
    */
 
-    FloatingActionButton fab;
+    NotesAdapter myAdapter;
+    List<Note> noteList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initMenus();
-        addFragment();
+        setListNoteFragment();
     }
-
-    private void addFragment() {
-        FirstFragment firstFragment = new FirstFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.first_fragment_container, firstFragment);
-        fragmentTransaction.commit();
-    }
-
 
     private void initMenus() {
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -70,40 +70,61 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, id, Toast.LENGTH_LONG).show();
             return true;
         });
+    }
 
-
+    private void setListNoteFragment() {
+        ListNotesFragment fragment = new ListNotesFragment();
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.fragment_container, fragment).commit();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Определяем меню приложения (активити)
         getMenuInflater().inflate(R.menu.options_menu, menu);
+        noteList = new ArrayList<>();
+        myAdapter = new NotesAdapter(this, noteList);
         MenuItem searchItem = menu.findItem(R.id.search_bar); // поиск пункта меню поиска
         SearchView searchView = (SearchView) searchItem.getActionView(); // строка поиска
         searchView.setQueryHint("Search Notes Here");
         SearchView.OnQueryTextListener listener = new SearchView.OnQueryTextListener() {
-            // реагирует на конец ввода поиска
+
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
 
-            // реагирует на нажатие каждой клавиши
             @Override
             public boolean onQueryTextChange(String newText) {
-                return false;
+                myAdapter.getFilter().filter(newText); // НЕ РАБОТАЕТ ПОИСК (((((9 почему?(
+                return true;
             }
         };
         searchView.setOnQueryTextListener(listener);
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.delete_all_notes) {
-            deleteAllNotes();
+        switch (item.getItemId()){
+            case R.id.delete_all_notes:
+                deleteAllNotes();
+                return  true;
+            case R.id.settings:
+                setSettingsFragment();
+                return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setSettingsFragment() {
+        SettingsFragment fragment = new SettingsFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.fragment_container,fragment).commit();
     }
 
     private void deleteAllNotes() {
