@@ -29,12 +29,11 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
     Context context;
     List<Note> noteList;
     List<Note> newList;
-    private Fragment fragment;
 
     public NotesAdapter(Context context, List<Note> noteList, Fragment fragment) {
         this.context = context;
         this.noteList = noteList;
-        this.fragment= fragment;
+        //this.fragment= fragment;
     }
 
     public NotesAdapter(Context context, List<Note> noteList) {
@@ -110,7 +109,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
             title = itemView.findViewById(R.id.tvTitle);
             description = itemView.findViewById(R.id.tvDescription);
             layout = itemView.findViewById(R.id.note_layout);
-            registerContextMenu(itemView);
+            //registerContextMenu(itemView);
            layout.setOnClickListener(v -> {
                 AppCompatActivity activity = (AppCompatActivity) itemView.getContext();
                 UpdateNotesFragment updateNotesFragment = new UpdateNotesFragment();
@@ -147,9 +146,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
         }
     }
 
-    private void registerContextMenu(View itemView) {
+   /* private void registerContextMenu(View itemView) {
         if (fragment != null){
             fragment.registerForContextMenu(itemView);
         }
-    }
+    }  */
 }

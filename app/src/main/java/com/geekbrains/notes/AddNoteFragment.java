@@ -20,7 +20,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class AddNoteFragment extends Fragment {
 
-    private static final String CURRENT_NOTE = "Current note";
     EditText title, description;
     Button btn_add;
 
