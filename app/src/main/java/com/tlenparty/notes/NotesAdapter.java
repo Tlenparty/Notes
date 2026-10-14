@@ -1,4 +1,4 @@
-package com.geekbrains.notes;
+package com.tlenparty.notes;
 
 import android.app.Activity;
 import android.content.Context;

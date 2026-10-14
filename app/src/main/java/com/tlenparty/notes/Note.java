@@ -1,4 +1,4 @@
-package com.geekbrains.notes;
+package com.tlenparty.notes;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -1,4 +1,4 @@
-package com.geekbrains.notes;
+package com.tlenparty.notes;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.geekbrains.notes", appContext.getPackageName());
+        assertEquals("com.tlenparty.notes", appContext.getPackageName());
     }
 }
